@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="icon" href="{{asset('images/icons/almaVerde.ico')}}"/>
+	<link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{asset('fonts/iconic/css/material-design-iconic-font.min.css')}}">
+	<link rel="stylesheet" href="{{asset('fonts/linearicons-v1.0.0/icon-font.min.css')}}">
+	<link rel="stylesheet" href="{{asset('vendor/animate/animate.css')}}">	
+	<link rel="stylesheet" href="{{asset('vendor/css-hamburgers/hamburgers.min.css')}}">
+	<link rel="stylesheet" href="{{asset('vendor/animsition/css/animsition.min.css')}}">
+	<link rel="stylesheet" href="{{asset('vendor/select2/select2.min.css')}}">	
+	<link rel="stylesheet" href="{{asset('vendor/daterangepicker/daterangepicker.css')}}">
+	<link rel="stylesheet" href="{{asset('vendor/slick/slick.css')}}">
+	<link rel="stylesheet" href="{{asset('vendor/MagnificPopup/magnific-popup.css')}}">
+	<link rel="stylesheet" href="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+	<link rel="stylesheet" href="{{asset('css/util.css')}}">
+	<link rel="stylesheet" href="{{asset('css/main.css')}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css')}}"/>
+{% endblock %}
+
+{% block contenido %}
+    {% block header %}
+        {{ include('registration/header.html.twig') }}
+    {% endblock %}
+    {% block body %}
+        <div class="container-fluid bg-light py-5">
+		<form method="post">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+
+			{% if app.user %}
+				<div class="mb-3">
+					Estás logueado como:
+					{{ app.user.email }},
+					<a href="{{ path('app_logout') }}">Cerrar sesión</a>
+				</div>
+			{% endif %}
+			<div class="col-md-6 m-auto text-center">
+				<h1 class="h1 text-center">Inicia sesión</h1>
+				<div class="form-group row mb-4">
+					<label for="inputEmail" class="col-md-2 col-form">Email:</label>
+					<div class="col-md-10 col-sm-12">
+						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+					</div>
+				</div>
+				<div class="form-group row mb-4">
+					<label for="inputPassword" class="col-md-2 col-form">Contraseña:</label>
+					<div class="col-md-10 col-sm-12">
+						<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+					</div>
+				</div>
+				<input
+				type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				{#
+													        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+													        See https://symfony.com/doc/current/security/remember_me.html
+													
+													        <div class="checkbox mb-3">
+													            <label>
+													                <input type="checkbox" name="_remember_me"> Remember me
+													            </label>
+													        </div>
+													    #}
+				<div class="form-group row">
+					<div class="col-md-12 mb-4">
+						<button class="'flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04'" type="submit">
+							Iniciar sesión
+						</button>
+						<a href='register' class="nav-link">Crear una cuenta</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+    {% endblock %}
+    {% block footer %}
+        {{ include('main/footer.html.twig') }}
+    {% endblock %}
+    {% block javascripts %}
+		<script src="{{asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+		<script src="{{asset('vendor/animsition/js/animsition.min.js')}}"></script>
+		<script src="{{asset('vendor/bootstrap/js/popper.js')}}"></script>
+		<script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+		<script>
+			$(".js-select2").each(function(){
+				$(this).select2({
+					minimumResultsForSearch: 20,
+					dropdownParent: $(this).next('.dropDownSelect2')
+				});
+			})
+		</script>
+		<script src="{{asset('vendor/daterangepicker/moment.min.js')}}"></script>
+		<script src="{{asset('vendor/daterangepicker/daterangepicker.js')}}"></script>
+		<script src="{{asset('vendor/slick/slick.min.js')}}"></script>
+		<script src="{{asset('js/slick-custom.js')}}"></script>
+		<script src="{{asset('vendor/parallax100/parallax100.js')}}"></script>
+		<script>
+			$('.parallax100').parallax100();
+		</script>
+		<script src="{{asset('vendor/MagnificPopup/jquery.magnific-popup.min.js')}}"></script>
+		<script>
+			$('.gallery-lb').each(function() { // the containers for all your galleries
+				$(this).magnificPopup({
+					delegate: 'a', // the selector for gallery item
+					type: 'image',
+					gallery: {
+						enabled:true
+					},
+					mainClass: 'mfp-fade'
+				});
+			});
+		</script>
+		<script src="{{asset('vendor/isotope/isotope.pkgd.min.js')}}"></script>
+		<script src="{{asset('vendor/sweetalert/sweetalert.min.js')}}"></script>
+		<script>
+			$('.js-addwish-b2').on('click', function(e){
+				e.preventDefault();
+			});
+
+			$('.js-addwish-b2').each(function(){
+				var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+				$(this).on('click', function(){
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-b2');
+					$(this).off('click');
+				});
+			});
+
+			$('.js-addwish-detail').each(function(){
+				var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+				$(this).on('click', function(){
+					swal(nameProduct, "is added to wishlist !", "success");
+
+					$(this).addClass('js-addedwish-detail');
+					$(this).off('click');
+				});
+			});
+			$('.js-addcart-detail').each(function(){
+				var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+				$(this).on('click', function(){
+					swal(nameProduct, "is added to cart !", "success");
+				});
+			});
+		</script>
+		<script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+		<script>
+			$('.js-pscroll').each(function(){
+				$(this).css('position','relative');
+				$(this).css('overflow','hidden');
+				var ps = new PerfectScrollbar(this, {
+					wheelSpeed: 1,
+					scrollingThreshold: 1000,
+					wheelPropagation: false,
+				});
+
+				$(window).on('resize', function(){
+					ps.update();
+				})
+			});
+		</script>
+		<script src="{{asset('js/main.js')}}"></script>
+	{% endblock %}
+{% endblock %}

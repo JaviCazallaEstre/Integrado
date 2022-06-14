@@ -1,0 +1,86 @@
+$colorVerde: #09aa01;
+$blanco: #f1f1f1;
+$negro:rgba(0, 0, 0, 0);
+.bg1{
+    background-color: $colorVerde;
+}
+.main-menu > li:hover > a {
+    text-decoration: none;
+    color: $colorVerde;
+}
+.sub-menu > li:hover > a {
+    color: $colorVerde;
+    text-decoration: none;
+}
+.main-menu > li.active-menu > a {
+    color: $colorVerde;
+}
+#mapid {
+    width: 100%;
+    height: 300px;
+}
+video {
+    width: 100% !important;
+    height: auto !important;
+}
+.dropdown {
+    font-family: Poppins-Medium;
+    font-size: 14px;
+	padding: 5px 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: $blanco;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px $negro;
+    z-index: 1;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown-content a:hover {
+    color: $colorVerde;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: $colorVerde;
+  }
+  .foto {
+    aspect-ratio: 4/5;
+    object-fit: cover;
+  }
+  .hov-btn3:hover {
+    border-color: $colorVerde;
+    background-color: $colorVerde;
+    color: $blanco;
+  }
+  .main-menu-m {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: $colorVerde;
+}
+.hov-btn1:hover {
+  border-color: $colorVerde;
+  background-color: $colorVerde;
+  color: #fff;
+}
+.hov-cl1:hover {
+  color: $colorVerde;
+}

@@ -1,0 +1,132 @@
+<div class="container">
+	<div class="flex-w flex-sb-m p-b-52">
+		<div class="flex-w flex-l-m filter-tope-group m-tb-10"></div>
+
+		<div class="flex-w flex-c-m m-tb-10">
+			<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+				<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+				<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+				Filtros
+			</div>
+
+
+		</div>
+
+		<!-- Search product -->
+		<div class="dis-none panel-search w-full p-t-10 p-b-15">
+			<div class="bor8 dis-flex p-l-15">
+				<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+					<i class="zmdi zmdi-search"></i>
+				</button>
+
+				<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+			</div>
+		</div>
+		<div class="dis-none panel-filter w-full p-t-10">
+			<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+				<div class="filter-col p-r-15 p-b-27">
+					<div class="mtext-102 cl2 p-r-15 p-b-15">
+						Ordenar
+					</div>
+					<ul>
+						<li class="p-b-6 p-r-15">
+							<a href="#" class="filter-link stext-106 trans-04">
+								Precio: mayor a menor
+							</a>
+						</li>
+
+						<li class="p-b-6 p-r-15">
+							<a href="#" class="filter-link stext-106 trans-04">
+								Precio: menor a mayor
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="filter-col2 p-l-15 p-b-27">
+					<div class="mtext-102 cl2 p-b-15">
+						Capacidad
+					</div>
+					{% for capacidad in capacidades %}
+						<div class="flex-w p-t-4 m-r--5 p-l-15 form-check">
+							<input class="form-check-input" type="checkbox"/>
+							<label class="form-check-label" for="{{capacidad.capacidad}}">{{capacidad.capacidad}}</label>
+						</div>
+					{% endfor %}
+				</div>
+
+				<div class="filter-col3 p-b-27">
+					<div class="mtext-102 cl2 p-b-15">
+						Variedad
+					</div>
+
+					{% for variedad in variedades %}
+						<div class="flex-w p-t-4 m-r--5 form-check">
+							<input class="form-check-input" type="checkbox"/>
+							<label class="form-check-label" for="{{variedad.variedad}}">{{variedad.variedad}}</label>
+						</div>
+					{% endfor %}
+				</div>
+
+				<div class="filter-col4 p-b-27">
+					<div class="mtext-102 cl2 p-b-15">
+						Campaña
+					</div>
+
+					{% for campana in campanas %}
+						<div class="flex-w p-t-4 m-r--5 form-check">
+							<input class="form-check-input" type="checkbox"/>
+							<label class="form-check-label" for="{{campana.campana}}">{{campana.campana}}</label>
+						</div>
+					{% endfor %}
+				</div>
+				<div class="filter-col5 p-b-27">
+					<div class="mtext-102 cl2 p-b-15">
+						Cosecha
+					</div>
+					{% for cosecha in cosechas %}
+						<div class="flex-w p-t-4 m-r--5 form-check">
+							<input class="form-check-input" type="checkbox"/>
+							<label class="form-check-label" for="{{cosecha.cosecha}}">{{cosecha.cosecha}}</label>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row isotope-grid">
+		{% for producto in productos %}
+			<div
+				class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women" style="position: absolute; left: 0%; top: 0px;">
+				<!-- Block2 -->
+				<div class="block2">
+					<div class="block2-pic hov-img0">
+						{% set foto = 'img/productos/' ~ producto.foto %}
+						<img class='foto' src="{{foto}}" alt="IMG-PRODUCT">
+						{% if app.user %}
+						<a id={{'comprar_' ~ producto.id}} href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 comprarProducto">
+							Añadir al carrito
+						</a>
+						{% endif %}
+					</div>
+
+					<div class="block2-txt flex-w flex-t p-t-14">
+						<div class="block2-txt-child1 flex-col-l ">
+							<a id={{'producto_' ~ producto.id}} href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 js-show-modal1 verDetalles">
+								{{producto.nombre}}
+							</a>
+							<span class="stext-105 cl3">
+								{{producto.precio}}
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+		<div class="overlay-modal1 js-hide-modal1"></div>
+	</div>
+</div>
