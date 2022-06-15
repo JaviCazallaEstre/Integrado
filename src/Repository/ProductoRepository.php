@@ -63,6 +63,7 @@ class ProductoRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
     public function findAllProducts(){
         $con = $this->getEntityManager()->getConnection();
         $query="
@@ -71,6 +72,18 @@ class ProductoRepository extends ServiceEntityRepository
         $consulta= $con->prepare($query);
         $datos=$consulta->executeQuery();
         return $datos->fetchAllAssociative();
+    }
+
+    public function findProductoById(int $id){
+        $idString=strval($id);
+        $con = $this->getEntityManager()->getConnection();
+        $query="
+        select id,nombre,precio,foto,stock,campana_id,capacidad_id,cosecha_id,variedad_id 
+        from producto
+        where id=".$idString.";";
+        $consulta= $con->prepare($query);
+        $datos=$consulta->executeQuery();
+        return $datos->fetchAssociative();
     }
 
     public function findProduct(string $id){

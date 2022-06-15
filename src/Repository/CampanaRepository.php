@@ -39,37 +39,49 @@ class CampanaRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Campana[] Returns an array of Campana objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Campana[] Returns an array of Campana objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Campana
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-    public function findAllCampaign(){
+    //    public function findOneBySomeField($value): ?Campana
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+    public function findAllCampaign()
+    {
         $con = $this->getEntityManager()->getConnection();
-        $query="
+        $query = "
         select id, campana 
         from campana;";
-        $consulta= $con->prepare($query);
-        $datos=$consulta->executeQuery();
+        $consulta = $con->prepare($query);
+        $datos = $consulta->executeQuery();
         return $datos->fetchAllAssociative();
+    }
+    public function findCampaignById(string $id)
+    {
+        $con = $this->getEntityManager()->getConnection();
+        $query = "
+        select id, campana 
+        from campana
+        where id=" . $id . ";";
+        $consulta = $con->prepare($query);
+        $datos = $consulta->executeQuery();
+        return $datos->fetchAssociative();
     }
 }

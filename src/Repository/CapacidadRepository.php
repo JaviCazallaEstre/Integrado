@@ -72,4 +72,14 @@ class CapacidadRepository extends ServiceEntityRepository
         $datos=$consulta->executeQuery();
         return $datos->fetchAllAssociative();
     }
+    public function findCapacityById(string $id){
+        $con = $this->getEntityManager()->getConnection();
+        $query="
+        select id, capacidad 
+        from capacidad
+        where id=".$id.";";
+        $consulta= $con->prepare($query);
+        $datos=$consulta->executeQuery();
+        return $datos->fetchAssociative();
+    }
 }

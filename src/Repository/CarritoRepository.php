@@ -63,4 +63,18 @@ class CarritoRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findOneByIdJoinedToProduct(int $idUsuario): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT c, p
+            FROM App\Entity\Carrito c
+            INNER JOIN c.producto p
+            WHERE c.usuario = :id'
+        )->setParameter('id', $idUsuario);
+
+        return $query->getArrayResult();
+    }
 }

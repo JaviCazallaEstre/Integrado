@@ -1,9 +1,12 @@
 $(function () {
-  carrito = [];
   $(".comprarProducto").on("click", function (ev) {
     ev.preventDefault();
     id = sacarID(this);
-    anadirAlCarrito(id);
+    cantidad =1
+    $.ajax({
+        url: "http://www.almaverde.com:8000/crea/carrito/"+id+"/"+cantidad,
+        type: 'get'
+    });
   });
 
   function sacarID(elemento) {
@@ -11,18 +14,10 @@ $(function () {
     return idCompleto.split("_")[1];
   }
 
-  function anadirAlCarrito(id) {
-    carrito.push(id);
-  }
+
 
   $('.carrito').on("click",function (ev) {
     ev.preventDefault()
-    carrito=JSON.stringify(carrito);
-    $.ajax({
-        url: "http://www.almaverde.com:8000/carrito/",
-        type: "get",
-        data: carrito,
-    });
   })
 
   $(".verDetalles").on("click", function (ev) {
@@ -44,13 +39,6 @@ $(function () {
             .replace("</div>", "")
             .replaceAll("\t", "")
         );
-        var formatter = new Intl.NumberFormat("es-ES", {
-          style: "currency",
-          currency: "EUR",
-        });
-        precio = $(".precioModal").text();
-        precioFormateado = formatter.format(precio);
-        $(".precioModal").text(precioFormateado);
       }
     );
     $(".js-modal1'").addClass("show-modal1");

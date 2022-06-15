@@ -73,4 +73,14 @@ class VariedadRepository extends ServiceEntityRepository
         $datos=$consulta->executeQuery();
         return $datos->fetchAllAssociative();
     }
+    public function findVrietyById(string $id){
+        $con = $this->getEntityManager()->getConnection();
+        $query="
+        select id, variedad 
+        from variedad
+        where id=".$id.";";
+        $consulta= $con->prepare($query);
+        $datos=$consulta->executeQuery();
+        return $datos->fetchAssociative();
+    }
 }

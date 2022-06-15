@@ -32,6 +32,13 @@ class Cosecha
         return $this->id;
     }
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getCosecha(): ?string
     {
         return $this->cosecha;

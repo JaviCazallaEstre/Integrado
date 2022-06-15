@@ -15,10 +15,10 @@ class Carrito
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\OneToOne(targetEntity: producto::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Producto::class, cascade: ['persist', 'remove'])]
     private $producto;
 
-    #[ORM\ManyToOne(targetEntity: user::class, inversedBy: 'carritos')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'carritos')]
     #[ORM\JoinColumn(nullable: false)]
     private $usuario;
 
@@ -36,26 +36,26 @@ class Carrito
     }
 
     /**
-     * @return Collection<int, user>
+     * @return Collection<int, User>
      */
     public function getUsuario(): Collection
     {
         return $this->usuario;
     }
 
-    public function getProducto(): ?producto
+    public function getProducto(): ?Producto
     {
         return $this->producto;
     }
 
-    public function setProducto(?producto $producto): self
+    public function setProducto(?Producto $producto): self
     {
         $this->producto = $producto;
 
         return $this;
     }
 
-    public function setUsuario(?user $usuario): self
+    public function setUsuario(?User $usuario): self
     {
         $this->usuario = $usuario;
 

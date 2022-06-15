@@ -24,7 +24,7 @@ class TiendaController extends AbstractController
                 'id'=>$producto["id"],
                 'nombre'=>$producto["nombre"],
                 'foto' =>$producto["foto"],
-                'precio'=>$producto["precio"],
+                'precio'=>$producto["precio"] / 100,
                 'stock'=>$producto["stock"],
                 'idCosecha'=>$producto["cosecha_id"],
                 'idCampana'=>$producto["campana_id"],
@@ -80,6 +80,9 @@ class TiendaController extends AbstractController
         if(!$producto){
             throw $this->createNotFoundException("El producto que buscas no existe");
         }else{
+            $precioCentimos = (int)$producto["precio"];
+            $precioEuros = $precioCentimos / 100;
+            $producto["precio"] = $precioEuros;
             $response = array(
                 "code"=>200,
                 "response"=> $this->render('detalles_producto/contenido.html.twig',[

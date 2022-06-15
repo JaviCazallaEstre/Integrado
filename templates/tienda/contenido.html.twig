@@ -117,8 +117,8 @@
 							<a id={{'producto_' ~ producto.id}} href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 js-show-modal1 verDetalles">
 								{{producto.nombre}}
 							</a>
-							<span class="stext-105 cl3">
-								{{producto.precio}}
+							<span class="stext-105 cl3 precioPagina">
+								{{producto.precio|format_currency('EUR', locale='es')}}
 							</span>
 						</div>
 					</div>

@@ -31,6 +31,13 @@ class Campana
         return $this->id;
     }
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getCampana(): ?string
     {
         return $this->campana;

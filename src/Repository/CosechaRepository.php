@@ -72,4 +72,14 @@ class CosechaRepository extends ServiceEntityRepository
         $datos=$consulta->executeQuery();
         return $datos->fetchAllAssociative();
     }
+    public function findHarvestById(string $id){
+        $con = $this->getEntityManager()->getConnection();
+        $query="
+        select id, cosecha 
+        from cosecha
+        where id=".$id.";";
+        $consulta= $con->prepare($query);
+        $datos=$consulta->executeQuery();
+        return $datos->fetchAssociative();
+    }
 }
