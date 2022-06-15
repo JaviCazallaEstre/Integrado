@@ -22,25 +22,25 @@ class CarritoController extends AbstractController
         $productosUnicosConCantidad = array_map(
             function ($producto) use ($cantidades) { 
                 $producto["cantidad"] = $cantidades[$producto['id']];
+                $producto["precio"] = $producto["precio"] / 100;
                 return $producto; 
             },
             $productosUnicos
         );
-        dd($productosUnicosConCantidad);
         return $this->render('carrito/index.html.twig', [
             'controller_name' => 'CarritoController',
+            'productos'=>$productosUnicosConCantidad
         ]);
     }
 
-    #[Route('/crea/carrito/{idProducto}/{cantidad}', name: 'creaCarrito')]
-    public function creaCarrito(ManagerRegistry $doctrine,EntityManagerInterface $entityManager, int $idProducto, int $cantidad)
+    #[Route('/crea/carrito/{idProducto}', name: 'creaCarrito')]
+    public function creaCarrito(ManagerRegistry $doctrine,EntityManagerInterface $entityManager, int $idProducto)
     {
-        if ( $idProducto != null && $cantidad > 0) {
+        if ($idProducto != null) {
             $producto= $doctrine->getRepository(Producto::class)->find($idProducto);
             $carrito = new Carrito;
             $carrito->setUsuario($this->getUser());
             $carrito->setProducto($producto);
-            $carrito->setCantidad($cantidad);
             $entityManager->persist($carrito);
             $entityManager->flush();
             $response = array(
@@ -48,7 +48,7 @@ class CarritoController extends AbstractController
             );
             return new Response(json_encode($response));
         } else {
-            throw $this->createNotFoundException("El producto que quieres comprar no existe o la cantidad es inválida.");
+            throw $this->createNotFoundException("El producto que quieres comprar no existe.");
         }
     }
 }

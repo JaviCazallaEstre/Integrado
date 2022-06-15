@@ -4,7 +4,7 @@ $(function () {
     id = sacarID(this);
     cantidad =1
     $.ajax({
-        url: "http://www.almaverde.com:8000/crea/carrito/"+id+"/"+cantidad,
+        url: "http://www.almaverde.com:8000/crea/carrito/"+id,
         type: 'get'
     });
   });
@@ -15,6 +15,10 @@ $(function () {
   }
 
 
+$(".carrito").on("click",function(ev){
+  ev.preventDefault();
+  $(location).attr('href',"http://www.almaverde.com:8000/carrito");
+})
 
   $('.carrito').on("click",function (ev) {
     ev.preventDefault()

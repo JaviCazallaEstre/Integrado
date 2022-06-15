@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private $CodigoPostal;
 
-    #[ORM\OneToMany(mappedBy: 'usuario', targetEntity: Carrito::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'usuario', targetEntity: Carrito::class)]
     private $carritos;
 
 
@@ -359,4 +359,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 }
