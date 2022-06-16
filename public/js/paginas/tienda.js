@@ -2,7 +2,6 @@ $(function () {
   $(".comprarProducto").on("click", function (ev) {
     ev.preventDefault();
     id = sacarID(this);
-    cantidad =1
     $.ajax({
         url: "http://www.almaverde.com:8000/crea/carrito/"+id,
         type: 'get'
@@ -19,10 +18,6 @@ $(".carrito").on("click",function(ev){
   ev.preventDefault();
   $(location).attr('href',"http://www.almaverde.com:8000/carrito");
 })
-
-  $('.carrito').on("click",function (ev) {
-    ev.preventDefault()
-  })
 
   $(".verDetalles").on("click", function (ev) {
     ev.preventDefault();

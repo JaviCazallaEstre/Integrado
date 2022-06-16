@@ -19,13 +19,15 @@
 	<link rel="stylesheet" href="{{asset('css/main.css')}}">
 	<link rel="stylesheet" href="{{asset('css/custom.css')}}"/>
 {% endblock %}
-{% block title %}Tienda{% endblock %}
+{% block title %}Carrito{% endblock %}
 {% block contenido %}
     {% block body %}
         {% block header %}
             {{include('carrito/header.html.twig')}}
         {% endblock %}
-        {{include('carrito/contenido.html.twig')}}
+			<div id"divContenido" class = "contenidoCarrito">
+        		{{include('carrito/contenido.html.twig')}}
+			</div>
         {% block footer %}
             {{include('main/footer.html.twig')}}
         {% endblock %}
@@ -116,6 +118,7 @@
 				});
 			</script>
 			<script src="{{asset('js/main.js')}}"></script>
+			<script src="{{asset('js/paginas/jquery.blockUI.js')}}"></script>
 			<script src="{{asset('js/paginas/carrito.js')}}"></script>
 		{% endblock %}
 {% endblock %}

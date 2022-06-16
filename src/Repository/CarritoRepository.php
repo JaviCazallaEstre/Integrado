@@ -77,4 +77,38 @@ public function findOneByIdJoinedToProduct(int $idUsuario): array
 
         return $query->getArrayResult();
     }
+
+    public function findFirstCarritoForUserAndProduct(int $idUsuario, int $idProducto): ?Carrito
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT c
+            FROM App\Entity\Carrito c
+            WHERE c.usuario = :idUsuario
+            AND c.producto = :idProducto'
+        )
+        ->setMaxResults(1)
+        ->setParameter('idUsuario', $idUsuario)
+        ->setParameter("idProducto",$idProducto);
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findAllCarritoForUserAndProduct(int $idUsuario, int $idProducto): array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT c
+            FROM App\Entity\Carrito c
+            WHERE c.usuario = :idUsuario
+            AND c.producto = :idProducto'
+        )
+        ->setParameter('idUsuario', $idUsuario)
+        ->setParameter("idProducto",$idProducto);
+
+        return $query->getArrayResult();
+    }
+
+
 }
+
