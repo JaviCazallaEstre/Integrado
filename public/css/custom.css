@@ -94,4 +94,9 @@ video {
 
 .hov-cl1:hover {
   color: #09aa01;
+}
+
+.mensajeBlock {
+  font-family: Poppins-Regular;
+  font-size: 50px;
 }/*# sourceMappingURL=custom.css.map */

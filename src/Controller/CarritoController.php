@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use DateTime;
+use App\Entity\Compra;
 use App\Entity\Carrito;
 use App\Entity\Producto;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +18,7 @@ class CarritoController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $carritos = $doctrine->getRepository(Carrito::class)->findOneByIdJoinedToProduct($this->getUser()->getId());
+
         $productos = array_map(function ($carrito) {
             return $carrito["producto"];
         }, $carritos);
@@ -111,5 +114,42 @@ class CarritoController extends AbstractController
         } else {
             throw $this->createNotFoundException("El producto que quieres comprar no existe.");
         }
+    }
+    #[Route('/comprar', name:'comprar')]
+    public function compra(ManagerRegistry $doctrine, EntityManagerInterface $entityManager) {
+        $carritos = $doctrine->getRepository(Carrito::class)->findOneByIdJoinedToProduct($this->getUser()->getId());
+
+        if (count($carritos) > 0) {
+            $compra = new Compra();
+            $compra->setFecha(new DateTime());
+            $compra->setUsuario($this->getUser());
+            foreach ($carritos as $carrito){
+                $producto = $doctrine->getRepository(Producto::class)->findOneBy([
+                    "id"=>$carrito["producto"]["id"]
+                ]);
+                if($producto != null) {
+                    $compra->addCompra($producto);
+                    $producto->setStock($producto->getStock() - 1);
+                }
+                $carritoRepository = $doctrine->getRepository(Carrito::class);
+                $entityCarrito = $carritoRepository->find($carrito["id"]);
+                if($entityCarrito!= null) {
+                    $carritoRepository->remove($entityCarrito);
+                } 
+            }
+            
+            $entityManager->persist($compra);
+            $entityManager->flush();
+            $response = array(
+                "code" => 200
+            );
+        } else {
+            $response = array(
+                "code" => 403,
+                "message" => "El carrito debe tener productos para poder realizar una compra"
+            );
+        }
+        
+        return new Response(json_encode($response));
     }
 }

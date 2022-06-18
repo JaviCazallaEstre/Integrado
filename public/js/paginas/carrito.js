@@ -51,6 +51,19 @@ $(function () {
     });
   });
 
+  $(document).on("click", ".botonPagar",function(ev){
+    ev.preventDefault();
+    $.ajax({
+      url: "http://www.almaverde.com:8000/comprar",
+      success: function(respuesta){
+        if((respuesta["code"]=200)){
+
+        }else if((respuesta["code"]=200)){
+
+        }
+      }
+    });
+  });
 
   function sacarID(elemento) {
     var idCompleto = $(elemento).attr("id");

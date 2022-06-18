@@ -92,10 +92,7 @@ class Compra
 
     public function addCompra(Producto $compra): self
     {
-        if (!$this->compras->contains($compra)) {
-            $this->compras[] = $compra;
-        }
-
+        $this->compras[] = $compra;
         return $this;
     }
 

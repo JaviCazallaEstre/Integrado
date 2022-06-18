@@ -39,32 +39,32 @@ class CarritoRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Carrito[] Returns an array of Carrito objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Carrito[] Returns an array of Carrito objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('c.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Carrito
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Carrito
+    //    {
+    //        return $this->createQueryBuilder('c')
+    //            ->andWhere('c.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
-public function findOneByIdJoinedToProduct(int $idUsuario): array
+    public function findOneByIdJoinedToProduct(int $idUsuario): array
     {
         $entityManager = $this->getEntityManager();
 
@@ -87,9 +87,9 @@ public function findOneByIdJoinedToProduct(int $idUsuario): array
             WHERE c.usuario = :idUsuario
             AND c.producto = :idProducto'
         )
-        ->setMaxResults(1)
-        ->setParameter('idUsuario', $idUsuario)
-        ->setParameter("idProducto",$idProducto);
+            ->setMaxResults(1)
+            ->setParameter('idUsuario', $idUsuario)
+            ->setParameter("idProducto", $idProducto);
 
         return $query->getOneOrNullResult();
     }
@@ -103,12 +103,9 @@ public function findOneByIdJoinedToProduct(int $idUsuario): array
             WHERE c.usuario = :idUsuario
             AND c.producto = :idProducto'
         )
-        ->setParameter('idUsuario', $idUsuario)
-        ->setParameter("idProducto",$idProducto);
+            ->setParameter('idUsuario', $idUsuario)
+            ->setParameter("idProducto", $idProducto);
 
         return $query->getArrayResult();
     }
-
-
 }
-

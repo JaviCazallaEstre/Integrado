@@ -63,4 +63,18 @@ class CompraRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findOneShopByIdJoinedToProduct(int $idUsuario): array
+{
+    $entityManager = $this->getEntityManager();
+
+    $query = $entityManager->createQuery(
+        'SELECT c, p
+        FROM App\Entity\Compra c
+        INNER JOIN c.compras p
+        WHERE c.usuario = :id'
+    )->setParameter('id', $idUsuario);
+
+    return $query->getArrayResult();
+}
 }

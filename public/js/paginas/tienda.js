@@ -1,6 +1,7 @@
 $(function () {
   $(".comprarProducto").on("click", function (ev) {
     ev.preventDefault();
+    mostrarLoading();
     id = sacarID(this);
     $.ajax({
         url: "http://www.almaverde.com:8000/crea/carrito/"+id,
@@ -46,4 +47,21 @@ $(".carrito").on("click",function(ev){
     $(".modalAceite").empty();
     $(".js-modal1").removeClass("show-modal1");
   });
+
+  function mostrarLoading() {
+    $.blockUI({ 
+      message: "Añadido al carrito",
+      css: {
+      class: 'mensajeBlock',
+      border: 'none', 
+      padding: '15px', 
+      backgroundColor: '#000', 
+      '-webkit-border-radius': '10px', 
+      '-moz-border-radius': '10px', 
+      opacity: .5, 
+      color: '#fff' 
+  } }); 
+  setTimeout($.unblockUI, 2000);
+  }
+
 });
