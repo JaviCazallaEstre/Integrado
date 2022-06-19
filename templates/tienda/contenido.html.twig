@@ -30,13 +30,13 @@
 					</div>
 					<ul>
 						<li class="p-b-6 p-r-15">
-							<a href="#" class="filter-link stext-106 trans-04">
+							<a id="ordenaMayor" href="#" class="filter-link stext-106 trans-04">
 								Precio: mayor a menor
 							</a>
 						</li>
 
 						<li class="p-b-6 p-r-15">
-							<a href="#" class="filter-link stext-106 trans-04">
+							<a id="ordenaMenor" href="#" class="filter-link stext-106 trans-04">
 								Precio: menor a mayor
 							</a>
 						</li>
@@ -49,7 +49,7 @@
 					</div>
 					{% for capacidad in capacidades %}
 						<div class="flex-w p-t-4 m-r--5 p-l-15 form-check">
-							<input class="form-check-input" type="checkbox"/>
+							<input id="{{capacidad.capacidad}}" class="form-check-input filtros capacidad" type="checkbox"/>
 							<label class="form-check-label" for="{{capacidad.capacidad}}">{{capacidad.capacidad}}</label>
 						</div>
 					{% endfor %}
@@ -62,7 +62,7 @@
 
 					{% for variedad in variedades %}
 						<div class="flex-w p-t-4 m-r--5 form-check">
-							<input class="form-check-input" type="checkbox"/>
+							<input id="{{variedad.variedad}}" class="form-check-input filtros variedad" type="checkbox"/>
 							<label class="form-check-label" for="{{variedad.variedad}}">{{variedad.variedad}}</label>
 						</div>
 					{% endfor %}
@@ -75,7 +75,7 @@
 
 					{% for campana in campanas %}
 						<div class="flex-w p-t-4 m-r--5 form-check">
-							<input class="form-check-input" type="checkbox"/>
+							<input id="{{ campana.campana }}" class="form-check-input filtros campana" type="checkbox"/>
 							<label class="form-check-label" for="{{campana.campana}}">{{campana.campana}}</label>
 						</div>
 					{% endfor %}
@@ -86,7 +86,7 @@
 					</div>
 					{% for cosecha in cosechas %}
 						<div class="flex-w p-t-4 m-r--5 form-check">
-							<input class="form-check-input" type="checkbox"/>
+							<input id="{{cosecha.cosecha}}" class="form-check-input filtros cosecha" type="checkbox"/>
 							<label class="form-check-label" for="{{cosecha.cosecha}}">{{cosecha.cosecha}}</label>
 						</div>
 					{% endfor %}

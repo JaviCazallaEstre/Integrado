@@ -89,14 +89,14 @@ video {
 .hov-btn1:hover {
   border-color: #09aa01;
   background-color: #09aa01;
-  color: #fff;
+  color: #f1f1f1;
 }
 
 .hov-cl1:hover {
   color: #09aa01;
 }
 
-.mensajeBlock {
+.blockPage {
   font-family: Poppins-Regular;
-  font-size: 50px;
+  font-size: 30px;
 }/*# sourceMappingURL=custom.css.map */

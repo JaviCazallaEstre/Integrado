@@ -79,13 +79,13 @@ video {
 .hov-btn1:hover {
   border-color: $colorVerde;
   background-color: $colorVerde;
-  color: #fff;
+  color: $blanco;
 }
 .hov-cl1:hover {
   color: $colorVerde;
 }
 
-.mensajeBlock{
+.blockPage{
   font-family: Poppins-Regular;
-  font-size: 50px;
+  font-size: 30px;
 }

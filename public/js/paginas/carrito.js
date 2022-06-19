@@ -7,9 +7,10 @@ $(function () {
       url: "http://www.almaverde.com:8000/crea/carrito/" + id,
       type: "get",
       success: function (respuesta) {
-        if ((respuesta["code"] = 200)) {
+        respuesta = JSON.parse(respuesta);
+        if (respuesta["code"] == 200) {
           cargaCarrito();
-        }else{
+        } else {
           ocultarLoading();
         }
       },
@@ -24,15 +25,15 @@ $(function () {
       url: "http://www.almaverde.com:8000/elimina/carrito/" + id,
       type: "get",
       success: function (respuesta) {
-        if ((respuesta["code"] = 200)) {
+        respuesta = JSON.parse(respuesta);
+        if (respuesta["code"] == 200) {
           cargaCarrito();
-        }else{
+        } else {
           ocultarLoading();
         }
       },
     });
   });
-
 
   $(document).on("click", ".quitarTodos", function (ev) {
     ev.preventDefault();
@@ -42,26 +43,28 @@ $(function () {
       url: "http://www.almaverde.com:8000/todos/carrito/" + id,
       type: "get",
       success: function (respuesta) {
-        if ((respuesta["code"] = 200)) {
+        respuesta = JSON.parse(respuesta);
+        if (respuesta["code"] == 200) {
           cargaCarrito();
-        }else{
+        } else {
           ocultarLoading();
         }
       },
     });
   });
 
-  $(document).on("click", ".botonPagar",function(ev){
+  $(document).on("click", ".botonPagar", function (ev) {
     ev.preventDefault();
     $.ajax({
       url: "http://www.almaverde.com:8000/comprar",
-      success: function(respuesta){
-        if((respuesta["code"]=200)){
-
-        }else if((respuesta["code"]=200)){
-
+      success: function (respuesta) {
+        respuesta = JSON.parse(respuesta);
+        if (respuesta["code"] == 200) {
+          $(location).attr("href", "http://www.almaverde.com:8000/pedidos");
+        } else if (respuesta["code"] == 403) {
+          mostrarMensajeError(respuesta["message"]);
         }
-      }
+      },
     });
   });
 
@@ -92,5 +95,21 @@ $(function () {
   }
   function ocultarLoading() {
     setTimeout($.unblockUI, 1);
+  }
+  function mostrarMensajeError(mensaje) {
+    $.blockUI({
+      message: mensaje,
+      onBlock: function () {},
+      css: {
+        border: "none",
+        padding: "15px",
+        backgroundColor: "#000",
+        "-webkit-border-radius": "10px",
+        "-moz-border-radius": "10px",
+        opacity: 0.6,
+        color: "#fff",
+      },
+    });
+    setTimeout($.unblockUI, 2000);
   }
 });
